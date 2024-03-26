@@ -6,7 +6,6 @@ on:
 env:
   AWS_REGION: ap-southeast-2
   ECR_REPOSITORY: cobosys
-  IMAGE_TAG: 0.1
 jobs:
 
   build:
@@ -45,6 +44,8 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v2
 
     - name: Publish Image to ECR
+      env:
+        ECR_URI: ${{ secrets.ECR_URI }}
+        IMAGE_TAG: 0.1
       run: |
-        docker tag ${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }} ${{ secrets.ECR_URI }}:${{ env.IMAGE_TAG }}
-        docker push ${{ secrets.ECR_URI }}:${{ env.IMAGE_TAG }}
+        docker push "$ECR_URI:$IMAGE_TAG"
