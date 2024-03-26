@@ -15,5 +15,6 @@
         <button type="submit">Stop CPU Load</button>
     </form>
     <h1>Bespinglobal V1</h1>
+    <h1>Bespinglobal V1</h1>
 </body>
 </html>
