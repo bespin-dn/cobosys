@@ -45,5 +45,6 @@ jobs:
 
     - name: Publish Image to ECR
       run: |
-        docker tag ${{ env.ECR_REPOSITORY}}:latest ${{ secrets.ECR_URI }}:latest
+        docker tag ${{ env.ECR_REPOSITORY }}:latest ${{ secrets.ECR_URI }}:latest
+        docker tag cobosys:latest 603229842386.dkr.ecr.ap-southeast-2.amazonaws.com/cobosys:latest
         docker push ${{ secrets.ECR_URI }}:latest
