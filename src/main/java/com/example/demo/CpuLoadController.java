@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
+import java.net.InetAddress;
 
 @Controller // @RestController로 하니 rendering을 하지 못하는 문제.
 public class CpuLoadController { // 클래스 이름 수정
@@ -12,7 +13,15 @@ public class CpuLoadController { // 클래스 이름 수정
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("cpuLoadRunning", cpuLoadRunning); // cpuLoadRunning 값을 뷰로 전달
+        try {
+            InetAddress ip = InetAddress.getLocalHost();
+            String ipAddress = ip.getHostAddress();
+            model.addAttribute("ipAddress", ipAddress); // IP 주소를 모델에 추가
+        } catch (Exception e) {
+            model.addAttribute("error", "IP 주소를 가져오는 중 오류가 발생했습니다."); // 에러 처리
+        }
+
+        model.addAttribute("cpuLoadRunning", cpuLoadRunning); // cpuLoadRunning 상태 또한 모델에 추가
         return "index";
     }
 
