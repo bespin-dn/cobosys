@@ -9,10 +9,16 @@ public class CpuLoadController { // 클래스 이름 수정
 
     private boolean cpuLoadRunning = false;
 
-    @GetMapping("/") // 오타 수정
-    public String index() {
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("cpuLoadRunning", cpuLoadRunning); // cpuLoadRunning 값을 뷰로 전달
         return "index";
     }
+
+    // @GetMapping("/") // 오타 수정
+    // public String index() {
+    //     return "index";
+    // }
 
     @PostMapping("/start-cpu-load")
     public String startCpuLoad() {

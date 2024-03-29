@@ -8,6 +8,9 @@
 </head>
 <body>
     <h1>CPU Load Generator</h1>
+    <!-- CPU Load 상태 표시 -->
+    <p>CPU Load Running: ${cpuLoadRunning}</p>
+    <br>
     <form action="/start-cpu-load" method="post">
         <button type="submit">Start CPU Load</button>
     </form>
