@@ -3,6 +3,7 @@ package com.example.demo; // package 설정을 하지 않으면, 구조를 불�
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
 
 @Controller // @RestController로 하니 rendering을 하지 못하는 문제.
 public class CpuLoadController { // 클래스 이름 수정
