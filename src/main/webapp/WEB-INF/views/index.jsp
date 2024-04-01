@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPU Load Generator</title>
 </head>
 <body>
     <h1>CPU Load Generator</h1>
     <p>Internal IP Address: ${ipAddress}</p> <!-- 내부 IP 주소 표시 -->
     <p>CPU Load Running: ${cpuLoadRunning}</p> <!-- CPU 부하 상태 표시 -->
+    <p>User space CPU Usage: ${cpuUsage}%</p> <!-- 현재 CPUI 사용량 표시 -->
     
     <form action="/start-cpu-load" method="post">
         <button type="submit">Start CPU Load</button>

@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
 import java.net.InetAddress;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 @Controller
 public class CpuLoadController {
@@ -16,10 +18,13 @@ public class CpuLoadController {
     public String index(Model model) {
         try {
             InetAddress ip = InetAddress.getLocalHost();
-            String ipAddress = ip.getHostAddress();
-            model.addAttribute("ipAddress", ipAddress); // IP 주소를 모델에 추가
+            model.addAttribute("ipAddress", ip.getHostAddress());
+
+            double cpuUsage = getSystemCpuUsage();
+            model.addAttribute("cpuUsage", cpuUsage);
+
         } catch (Exception e) {
-            model.addAttribute("error", "IP 주소를 가져오는 중 오류가 발생했습니다."); // 에러 처리
+            model.addAttribute("error", "오류가 발생했습니다: " + e.getMessage());
         }
 
         model.addAttribute("cpuLoadRunning", cpuLoadRunning);
@@ -61,4 +66,34 @@ public class CpuLoadController {
             }
         }
     }
+    
+    // CPU 사용률을 가져오는 메소드
+    private double getSystemCpuUsage() {
+        try {
+            Process process = Runtime.getRuntime().exec("top -b -n 1");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            double usCpuUsage = 0.0;
+    
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("Cpu(s):")) {
+                    // 'Cpu(s):' 행을 찾은 후, us 값을 추출
+                    String[] parts = line.split(",")[0].trim().split(" "); // ','로 나누고 첫 부분을 공백으로 나눔
+                    for (int i = 0; i < parts.length; i++) {
+                        if (parts[i].equals("us")) {
+                            // 'us' 바로 앞의 값이 CPU 사용률
+                            usCpuUsage = Double.parseDouble(parts[i-1]);
+                            return usCpuUsage;
+                        }
+                    }
+                }
+            }
+            reader.close();
+            return usCpuUsage;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0.0; // 오류 발생 시 0 반환
+        }
+    }
+
 }
