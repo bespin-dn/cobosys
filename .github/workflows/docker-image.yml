@@ -44,5 +44,5 @@ jobs:
 
     - name: Publish Image to ECR
       run: |
-        docker tag cobosys:latest ${{ secrets.ECR_REPOSITORY }}:latest
-        docker push ${{ secrets.ECR_REPOSITORY }}:latest
+        docker tag cobosys:latest ${{ secrets.ECR_REPOSITORY }}:v1
+        docker push ${{ secrets.ECR_REPOSITORY }}:v1
