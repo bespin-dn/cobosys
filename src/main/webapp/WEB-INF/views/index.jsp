@@ -22,7 +22,7 @@
     <c:if test="${not empty error}">
         <p>Error: ${error}</p>
     </c:if>
-    <h1>2024-04-08 V1</h1>
-    <h2>10:01</h2>
+    <h1>2024-04-08 v0.0.2</h1>
+    <h2>10:35</h2>
 </body>
 </html>
