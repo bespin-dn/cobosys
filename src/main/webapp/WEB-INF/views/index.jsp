@@ -22,5 +22,6 @@
     <c:if test="${not empty error}">
         <p>Error: ${error}</p>
     </c:if>
+    <h1>2024-04-08 V1</h1>
 </body>
 </html>
