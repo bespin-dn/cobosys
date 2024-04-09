@@ -23,5 +23,6 @@
         <p>Error: ${error}</p>
     </c:if>
     <h1>2024-04-09 FARGATE</h1>
+    <p1>ECR Version 0.0.3</p1>
 </body>
 </html>
